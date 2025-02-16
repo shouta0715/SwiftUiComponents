@@ -7,8 +7,22 @@
 
 import SwiftUI
 
+
+
 struct MultiSelectList: View {
   @Environment(ApplicationData.self) var app
+  
+  func removeBook(book: Book) {
+    var indexes = IndexSet()
+    if let index = app.userData.firstIndex(where: { $0.id == book.id }) {
+      indexes.insert(index)
+    }
+    
+    app.userData.remove(atOffsets: indexes)
+  }
+  
+  // MARK: - BODY
+  
     var body: some View {
       @Bindable var app = app
         
@@ -43,6 +57,13 @@ struct MultiSelectList: View {
           .background(.white)
           .onTapGesture {
             book.selected.toggle()
+          }
+          .swipeActions {
+            Button(role:. destructive) {
+              removeBook(book: book)
+            } label: {
+              Image(systemName: "trash")
+            }
           }
           
         }
