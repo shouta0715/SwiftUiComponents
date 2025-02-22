@@ -68,6 +68,10 @@ struct MultiSelectList: View {
           
         }
       }
+      .listStyle(.plain)
+      .refreshable {
+        print("Refreshed")
+      }
     }
 }
 
