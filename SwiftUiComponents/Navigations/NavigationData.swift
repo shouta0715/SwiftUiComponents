@@ -3,6 +3,8 @@ import SwiftUI
 import Observation
 
 @Observable class NavigationData: @unchecked Sendable {
+  var viewPath = NavigationPath()
+  var selectedBook: Book? = nil
    @ObservationIgnored var userData: [Book] {
       didSet {
          filterValues(search: "")
